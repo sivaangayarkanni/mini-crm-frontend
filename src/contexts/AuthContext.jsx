@@ -13,7 +13,7 @@ export const useAuth = () => {
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
-  const [token, setToken] = useState(localStorage.getItem('token') || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjUwN2YxZjc3YmNmODZjZDc5OTQzOTAxMSIsImlhdCI6MTc2NTk4Nzc0NywiZXhwIjoxNzY2NTkyNTQ3fQ.7WSQ-EXihT3I5ZwJWRZdXG5j0lXfoawAA_S15DSfrjg');
+  const [token, setToken] = useState(localStorage.getItem('token'));
   const [loading, setLoading] = useState(true);
 
   // Set axios defaults
@@ -43,7 +43,7 @@ export const AuthProvider = ({ children }) => {
 
   const login = async (email, password) => {
     try {
-      const response = await axios.post('http://localhost:5000/api/auth/login', {
+      const response = await axios.post('/api/auth/login', {
         email,
         password,
       });
@@ -64,7 +64,7 @@ export const AuthProvider = ({ children }) => {
   const register = async (name, email, password, role) => {
     try {
       console.log('Registering user:', { name, email, role });
-      const response = await axios.post('http://localhost:5000/api/auth/register', {
+      const response = await axios.post('/api/auth/register', {
         name,
         email,
         password,
